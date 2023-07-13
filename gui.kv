@@ -1,0 +1,20 @@
+<MyTextInputWidget@TextInput>:
+
+<User>:
+  name: "user_screen"
+  GridLayout:
+    cols: 2
+    size_hint: 0.3, 0.3  
+    pos_hint: {"x":0.1, "top":0.9}
+
+    MyTextInputWidget:
+      hint_text: "True Positive"
+    MyTextInputWidget:
+      hint_text: "False Positive"
+    MyTextInputWidget:
+      hint_text: "False Negative"
+    MyTextInputWidget:
+      hint_text: "True Negative"
+
+<RootWidget>:
+  User
