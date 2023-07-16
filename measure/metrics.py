@@ -49,22 +49,16 @@ class Metric:
 
     def all_metrics(self):
         dic = {
-            "Recall": self.recall(),
-            "Specificity": self.specificity(),
-            "Precision": self.precision(),
-            "Accuracy": self.accuracy(),
-            "F-score": self.f_score(),
-            "Matthews Correlation": self.matthews_correlation(),
-            "Balanced Accuracy": self.balanced_accuracy(),
-            "Cohen's Kappa": self.cohen_kappa(),
-            "G-mean": self.g_mean()
+                "Recall": f'{self.recall():.4f}',
+                "Specificity": f'{self.specificity():.4f}',
+                "Precision": f'{self.precision():.4f}',
+                "Accuracy": f'{self.accuracy():.4f}',
+                "F-score": f'{self.f_score():.4f}',
+                "Matthews Correlation": f'{self.matthews_correlation():.4f}',
+                "Balanced Accuracy": f'{self.balanced_accuracy():.4f}',
+                "Cohen's Kappa": f'{self.cohen_kappa():.4f}',
+                "G-mean": f'{self.g_mean():.4f}',
         }
 
         return dic
 
-
-test = Metric(c_11=389, c_00=31806, c_01=351, c_10=49)
-full = test.all_metrics()
-
-for k, v in full.items():
-    print('{k}: {v:.4f}'.format(k=k, v=v))

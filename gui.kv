@@ -8,13 +8,30 @@
     pos_hint: {"x":0.1, "top":0.9}
 
     MyTextInputWidget:
+      id: TP
       hint_text: "True Positive"
     MyTextInputWidget:
+      id: FP
       hint_text: "False Positive"
     MyTextInputWidget:
+      id: FN
       hint_text: "False Negative"
     MyTextInputWidget:
+      id: TN
       hint_text: "True Negative"
+
+    Button:
+      text: "Submit"
+      on_press: root.submit()
+  
+  FloatLayout:
+    
+    Label:
+      id: results_measure
+      pos_hint: {"x": 0.2, "y": 0.1}
+      color: 0, 0, 0, 1
+      font_size: self.width/40
+      text: "Results"
 
 <RootWidget>:
   User
