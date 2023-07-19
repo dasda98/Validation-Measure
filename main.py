@@ -1,5 +1,7 @@
 from kivymd.app import MDApp
-from kivymd.uix.list import OneLineListItem, MDList
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.list import OneLineListItem
+from kivymd.uix.dialog import MDDialog
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.screenmanager import MDScreenManager
 from kivy.lang import Builder
@@ -15,6 +17,7 @@ class User(MDScreen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.dialog = None
 
     def submit(self):
         c_11 = self.ids.TP.text
@@ -35,13 +38,32 @@ class User(MDScreen):
 
             for k, v in results.items():
                 self.ids.container.add_widget(
-                    OneLineListItem(text=f'[b]{k}:[/b]   {v} \n', on_release=self._copy_text_to_clipboard)
+                    OneLineListItem(text=f'[b] {k}: [/b] {v} \n', on_release=self._get_measure_explain)
                 )
 
-    def _copy_text_to_clipboard(self, onelinelistitem):
-        text = onelinelistitem.text
+    def _clean_text(self, text):
+        textsplit = text.split(' ')
+        textsplit = [word for word in textsplit if word not in ['[b]', '[/b]']]
+        result = ' '.join(textsplit)
 
-        Clipboard.copy(onelinelistitem.text)
+        return result
+
+    def _copy_text_to_clipboard(self, measure):
+        text = measure.text
+        result = self._clean_text(text)
+        Clipboard.copy(result)
+
+    def _get_measure_explain(self, measure):
+        text = measure.text
+        result = self._clean_text(text)
+        measure_type = result.split(' ')[0].split(':')[0]
+
+        if not self.dialog:
+            self.dialog = MDDialog(
+                text=text,
+
+            )
+        self.dialog.open()
 
     def clear(self):
         self.ids.TP.text = ''
