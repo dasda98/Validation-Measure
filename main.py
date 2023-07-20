@@ -7,7 +7,7 @@ from kivymd.uix.screenmanager import MDScreenManager
 from kivy.lang import Builder
 from kivy.core.clipboard import Clipboard
 
-from measure.metrics import Metric
+from measure.metrics import Metric, explained
 from config import *
 
 Builder.load_file('gui.kv')
@@ -58,10 +58,8 @@ class User(MDScreen):
         result = self._clean_text(text)
         measure_type = result.split(' ')[0].split(':')[0]
 
-        if not self.dialog:
-            self.dialog = MDDialog(
-                text=text,
-
+        self.dialog = MDDialog(
+                text=explained[measure_type],
             )
         self.dialog.open()
 
